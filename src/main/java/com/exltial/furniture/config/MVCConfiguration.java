@@ -32,7 +32,9 @@ public class MVCConfiguration implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
-                .excludePathPatterns("/view/toLogin").excludePathPatterns("/login/validate").excludePathPatterns("/static/**");
+                .excludePathPatterns("/view/toLogin")
+                .excludePathPatterns("/login/validate")
+                .excludePathPatterns("/static/**");
     }
 
     @Override

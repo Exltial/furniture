@@ -4,6 +4,7 @@
 
 Vue.http.options.emulateJSON = true;
 var api = {};
+
 api.post = function (url, query, successFn, errorFn) {
     Vue.http.post(url, query)
         .then(function (res) {
@@ -29,30 +30,22 @@ api.submit = function (param, successFn, errorFn) {
     api.post('/login/validate', param, successFn, errorFn)
 };
 
-var app = new Vue({
-    el: '#userMsg',
+var table = new Vue({
+    el: '#table',
     data: function () {
         return {
-            message: {
-                userName: '',
-                passWord: ''
-            }
+            skuList: [{
+                id: '1',
+                name: 'joy',
+                url: '../static/temp/200x150.jpg'
+            }, {
+                id: '2',
+                name: 'tony',
+                url: '../static/temp/200x150.jpg'
+            }]
         }
     },
-    router: new VueRouter(),
-    methods: {
-        submit: function () {
-            this.message.userName = sha256(this.message.userName);
-            this.message.passWord = sha256(this.message.passWord);
-            var param = {
-                request: JSON.stringify(this.message)
-            };
-            api.submit(param, function (res) {
-                if (res.result === true) {
-                    window.location.href = "/view/toIndex";
-                } else
-                    alert("登录失败!" + res.errorMsg);
-            })
-        }
+    beforeCreate: function () {
+        api.
     }
 });

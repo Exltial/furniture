@@ -4,6 +4,7 @@
 
 Vue.http.options.emulateJSON = true;
 var api = {};
+
 api.post = function (url, query, successFn, errorFn) {
     Vue.http.post(url, query)
         .then(function (res) {
@@ -36,8 +37,7 @@ var app = new Vue({
     },
     methods: {
         click: function () {
-            var code = sha256(this.message);
-            alert(code);
+            window.location.href = "/index.html";
         }
     }
 });
@@ -76,6 +76,30 @@ var submit = new Vue({
                     history.back();
                 }
             }, function (result) {
+            })
+        }
+    }
+});
+
+var table = new Vue({
+    el: '#table',
+    data: function () {
+        return {
+            skuList: [{}]
+        }
+    },
+    methods: {
+        add: function () {
+            if (this.skuList.size === 0) {
+                this.skuList[0].id = '1';
+                this.skuList[0].name = 'joy';
+                this.skuList[0].id = '1';
+
+            }
+            this.skuList.push({
+                id: '2',
+                name: 'tony',
+                url: '../static/temp/200x150.jpg'
             })
         }
     }
