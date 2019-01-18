@@ -104,3 +104,29 @@ var table = new Vue({
         }
     }
 });
+
+var p = new Vue({
+    el: '#p',
+    data: function () {
+        return {
+            p: [{}]
+        }
+    },
+    methods: {
+        click: function () {
+            let param = [{
+                a: '1',
+                b: 'tony'
+            }, {
+                a: '1',
+                b: 'tony'
+            }, {
+                a: '1',
+                b: 'tony'
+            }];
+            for (var i = 0; i < param.length; i++) {
+                this.p.push(param[i]);
+            }
+        }
+    }
+});

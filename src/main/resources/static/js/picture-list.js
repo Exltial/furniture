@@ -26,26 +26,52 @@ api.get = function (url, successFn, errorFn) {
         })
 };
 
-api.submit = function (param, successFn, errorFn) {
-    api.post('/login/validate', param, successFn, errorFn)
+api.getList = function (param, successFn, errorFn) {
+    api.post('/pic/list', param, successFn, errorFn)
 };
 
-var table = new Vue({
+let table = new Vue({
     el: '#table',
     data: function () {
         return {
-            skuList: [{
-                id: '1',
-                name: 'joy',
-                url: '../static/temp/200x150.jpg'
-            }, {
-                id: '2',
-                name: 'tony',
-                url: '../static/temp/200x150.jpg'
-            }]
+            skuList: [{}],
+            pageNum: 1,
+            hasNextPage: '',
+            hasPreviousPage: ''
         }
     },
-    beforeCreate: function () {
-        api.
+    mounted: function () {
+        this.getData();
+    },
+    methods: {
+        nextPage: function () {
+            if (this.hasNextPage) {
+                this.pageNum = this.pageNum + 1;
+                this.getData();
+            } else {
+                alert("到底了");
+            }
+        },
+        upPage: function () {
+            if (this.hasPreviousPage) {
+                this.pageNum = this.pageNum - 1;
+                this.getData();
+            } else {
+                alert("到头了");
+            }
+        },
+        getData: function () {
+            let _this = this;
+            let param = {
+                pageNum: _this.pageNum
+            };
+            api.getList(param, function (res) {
+                if (res.total != 0) {
+                    _this.skuList = res.list;
+                    _this.hasPreviousPage = res.hasPreviousPage;
+                    _this.hasNextPage = res.hasNextPage;
+                }
+            })
+        }
     }
 });
