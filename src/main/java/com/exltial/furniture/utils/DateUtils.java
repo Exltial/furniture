@@ -14,10 +14,13 @@ import java.util.Date;
  * @date 2019/1/28
  */
 public class DateUtils {
+    private DateUtils() {
+        //do nothing here
+    }
     public static String getNow() {
         Date now = DateUtil.now();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = simpleDateFormat.format(now);
-        return format;
+        return simpleDateFormat.format(now);
     }
+
 }

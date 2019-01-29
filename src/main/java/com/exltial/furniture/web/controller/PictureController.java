@@ -10,6 +10,7 @@ import com.exltial.furniture.entity.PicDetailEntity;
 import com.exltial.furniture.entity.PicEntity;
 import com.exltial.furniture.service.PictureService;
 import com.exltial.furniture.utils.DateUtils;
+import com.exltial.furniture.utils.ParamUtils;
 import com.exltial.furniture.utils.SessionUtils;
 import com.exltial.furniture.utils.UUIDUtils;
 import com.exltial.furniture.web.vo.ResultVO;
@@ -87,7 +88,7 @@ public class PictureController {
         ResultVO resultVO = new ResultVO();
         resultVO.setResult(false);
         log.info("addSku:{}", request);
-        String fileName = SessionUtils.get("fileName") instanceof String ? (String) SessionUtils.get("fileName") : "";
+        String fileName = SessionUtils.get(ParamUtils.FILENAME) instanceof String ? (String) SessionUtils.get(ParamUtils.FILENAME) : "";
         if (request == null) {
             return resultVO;
         }
@@ -159,14 +160,12 @@ public class PictureController {
         }
         // 获取文件名
         String fileName = file.getOriginalFilename();
-        SessionUtils.set("fileName", fileName);
+        SessionUtils.set(ParamUtils.FILENAME, fileName);
         log.info("上传的文件名为：" + fileName);
         // 获取文件的后缀名
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        String suffixName = fileName.substring(fileName.lastIndexOf('.'));
         log.info("上传的后缀名为：" + suffixName);
         // 文件上传后的路径
-        // 解决中文问题，liunx下中文路径，图片显示问题
-        // fileName = UUID.randomUUID() + suffixName;
         File dest = new File(filePath + fileName);
         // 检测是否存在目录
         if (!dest.getParentFile().exists()) {
@@ -213,7 +212,7 @@ public class PictureController {
             });
             if (!StringUtils.isEmpty(uploadFlag)) {
                 //上传图片
-                String fileName = SessionUtils.get("fileName") instanceof String ? (String) SessionUtils.get("fileName") : null;
+                String fileName = SessionUtils.get(ParamUtils.FILENAME) instanceof String ? (String) SessionUtils.get(ParamUtils.FILENAME) : null;
                 entity.setSkuUrl("/" + fileName);
             }
             entity.setCreateTime(DateUtils.getNow());

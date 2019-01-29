@@ -58,6 +58,13 @@ let app = new Vue({
                     alert(res.errorMsg);
                 }
             })
+        },
+        editDetails: function (name, url, param) {
+            layer.open({
+                type: 2,
+                title: name,
+                content: url + "?skuId=" + param
+            });
         }
     }
 });

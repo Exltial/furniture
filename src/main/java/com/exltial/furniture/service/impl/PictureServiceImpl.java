@@ -8,13 +8,14 @@ import com.exltial.furniture.dao.PictureDao;
 import com.exltial.furniture.entity.PicDetailEntity;
 import com.exltial.furniture.entity.PicEntity;
 import com.exltial.furniture.service.PictureService;
-import com.exltial.furniture.utils.PageUtils;
+import com.exltial.furniture.utils.ParamUtils;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -31,9 +32,9 @@ public class PictureServiceImpl implements PictureService {
     @Override
     public List<PicEntity> getPicList(Integer pageNum) {
         if (pageNum == null) {
-            return null;
+            return new LinkedList<>();
         }
-        PageHelper.startPage(pageNum, PageUtils.ROW);
+        PageHelper.startPage(pageNum, ParamUtils.ROW);
         return pictureDao.getList();
     }
 
