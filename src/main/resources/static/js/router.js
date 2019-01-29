@@ -1,23 +1,23 @@
 /*
  * Copyright (c) 2018-2019 JiaNing All Rights Reserved.
  */
-let app = new Vue({
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/index.html',
+            name: 'user'
+        }
+    ]
+});
+
+var app = new Vue({
     el: '#app',
+    routes: router,
     methods: {
         click: function () {
-            router.go({path: '/add'});
+            router.push({name: 'user'});
         }
     }
 });
-
-var App = Vue.extend();
-var router = new VueRouter();
-router.map({
-    '/add': {
-        component: app
-    }
-});
-router.redirect({
-    '*': '/'
-});
-router.start(App, '#app');

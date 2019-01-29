@@ -99,7 +99,7 @@ var table = new Vue({
             this.skuList.push({
                 id: '2',
                 name: 'tony',
-                url: '../static/temp/200x150.jpg'
+                url: 'file:///C:/Users/tanlei24/Desktop/cnaidc.png'
             })
         }
     }
@@ -127,6 +127,37 @@ var p = new Vue({
             for (var i = 0; i < param.length; i++) {
                 this.p.push(param[i]);
             }
+        }
+    }
+});
+
+
+let ul = new Vue({
+    el: '#ul',
+    data: function () {
+        return {
+            skuList: [{
+                a: '1',
+                b: '../static/temp/big/keting.jpg'
+            }, {
+                a: '2',
+                b: '../static/temp/big/keting.jpg'
+            }]
+        }
+    },
+    methods: {
+        click: function (param) {
+            alert(param);
+        }
+    }
+});
+
+let apptest = new Vue({
+    el: '#btnTest',
+    methods: {
+        click: function () {
+            document.getElementById("uploadFlag").value = 0;
+            alert(document.getElementById("uploadFlag").value);
         }
     }
 });

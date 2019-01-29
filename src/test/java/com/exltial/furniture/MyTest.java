@@ -4,25 +4,28 @@
 
 package com.exltial.furniture;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
-import com.exltial.furniture.entity.LoginEntity;
-import com.exltial.furniture.utils.SHA256Utils;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 public class MyTest {
     @Test
     public void test() {
-        LoginEntity loginEntity = JSON.parseObject("{\"userName\":\"tony\",\"passWord\":\"asdf105\"}", new TypeReference<LoginEntity>() {
-        });
-        log.info(JSON.toJSONString(loginEntity));
+        String uuid = UUID.randomUUID().toString();
+        log.info(uuid);
     }
 
     @Test
     public void sha256() {
-        log.info(SHA256Utils.coding("tony"));
-        log.info(SHA256Utils.coding("asdf105"));
     }
+}
+
+@Data
+class A {
+    List<String> list;
+    Integer num;
 }

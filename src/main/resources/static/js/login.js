@@ -29,6 +29,17 @@ api.submit = function (param, successFn, errorFn) {
     api.post('/login/validate', param, successFn, errorFn)
 };
 
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/view/toIndex',
+            name: 'index'
+        }
+    ]
+});
+
 var app = new Vue({
     el: '#userMsg',
     data: function () {
@@ -39,15 +50,20 @@ var app = new Vue({
             }
         }
     },
-    router: new VueRouter(),
+    router: router,
     methods: {
         submit: function () {
-            this.message.userName = sha256(this.message.userName);
-            this.message.passWord = sha256(this.message.passWord);
+            let userName = sha256(this.message.userName);
+            let passWord = sha256(this.message.passWord);
+            let userMsg = {
+                userName: userName,
+                passWord: passWord
+            };
             var param = {
-                request: JSON.stringify(this.message)
+                request: JSON.stringify(userMsg)
             };
             api.submit(param, function (res) {
+                var _this = this;
                 if (res.result === true) {
                     window.location.href = "/view/toIndex";
                 } else

@@ -4,11 +4,15 @@
 
 package com.exltial.furniture.web.view;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Controller
 @RequestMapping(value = "/view")
+@Slf4j
 public class ViewController {
 
     @RequestMapping(value = "/toLogin")
@@ -77,17 +81,26 @@ public class ViewController {
     }
 
     @RequestMapping(value = "/toPictureAdd")
-    public String toPictureAdd() {
+    public String toPictureAdd(String skuId) {
         return "picture-add";
     }
 
+    @RequestMapping(value = "/toPictureEdit")
+    public String toPictureEdit(String skuId) {
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        requestAttributes.getRequest().setAttribute("skuId", skuId);
+        return "picture-edit";
+    }
     @RequestMapping(value = "/toArticleClassEdit")
     public String toArticleClassEdit() {
         return "article-class-edit";
     }
 
     @RequestMapping(value = "/toPictureShow")
-    public String toPictureShow() {
+    public String toPictureShow(String skuId) {
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        requestAttributes.getRequest().setAttribute("skuId", skuId);
+        log.info(skuId);
         return "picture-show";
     }
 

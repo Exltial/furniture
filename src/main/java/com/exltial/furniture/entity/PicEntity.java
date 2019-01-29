@@ -21,5 +21,6 @@ public class PicEntity {
     private String skuSize;
     private String createTime;
     private int status;
-    private Long skuId;
+    private int cover;
+    private String skuId;
 }

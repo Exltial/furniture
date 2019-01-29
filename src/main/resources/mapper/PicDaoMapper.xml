@@ -9,5 +9,89 @@
     <select id="getList" resultType="com.exltial.furniture.entity.PicEntity">
         SELECT *
         FROM tb_sku
+        WHERE cover = 1
     </select>
+    <delete id="deleteSku" parameterType="java.lang.String">
+        DELETE
+        FROM tb_sku
+        WHERE sku_id = #{skuId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="addSku" parameterType="com.exltial.furniture.entity.PicEntity">
+        INSERT INTO tb_sku
+        <trim suffixOverrides=",">
+            SET price = #{price,jdbcType=DOUBLE},
+            status = #{status,jdbcType=INTEGER},
+            <if test="skuUrl!=null and ''!=skuUrl">
+                sku_url = #{skuUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName!=null and ''!=skuName">
+                sku_name = #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="skuDescr!=null and ''!=skuDescr">
+                sku_descr = #{skuDescr,jdbcType=VARCHAR},
+            </if>
+            <if test="skuType!=null and ''!=skuType">
+                sku_type = #{skuType,jdbcType=VARCHAR},
+            </if>
+            <if test="skuSize!=null and ''!=skuSize">
+                sku_size = #{skuSize,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime!=null and ''!=createTime">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="skuId!=null and ''!=skuId">
+                sku_id = #{skuId,jdbcType=VARCHAR},
+            </if>
+            <if test="cover!=null">
+                cover = #{cover,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <select id="getDetailBySkuId" parameterType="java.lang.String"
+            resultType="com.exltial.furniture.entity.PicDetailEntity">
+        SELECT *
+        FROM tb_sku
+        WHERE cover = 0
+          AND sku_id = #{skuId}
+    </select>
+    <select id="getSkuById" parameterType="java.lang.String" resultType="com.exltial.furniture.entity.PicEntity">
+        SELECT *
+        FROM tb_sku
+        WHERE sku_id = #{skuId,jdbcType=VARCHAR}
+          and cover = 1
+    </select>
+    <update id="updateSku" parameterType="com.exltial.furniture.entity.PicEntity">
+        UPDATE tb_sku
+        <trim suffixOverrides=",">
+            SET
+            <if test="price!=''">
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="status!=''">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="skuUrl!=null and ''!=skuUrl">
+                sku_url = #{skuUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName!=null and ''!=skuName">
+                sku_name = #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="skuDescr!=null and ''!=skuDescr">
+                sku_descr = #{skuDescr,jdbcType=VARCHAR},
+            </if>
+            <if test="skuType!=null and ''!=skuType">
+                sku_type = #{skuType,jdbcType=VARCHAR},
+            </if>
+            <if test="skuSize!=null and ''!=skuSize">
+                sku_size = #{skuSize,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime!=null and ''!=createTime">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="cover!=''">
+                cover = #{cover,jdbcType=BIGINT},
+            </if>
+        </trim>
+        WHERE sku_id = #{skuId,jdbcType=VARCHAR} AND cover = 1
+    </update>
 </mapper>

@@ -4,6 +4,7 @@
 
 package com.exltial.furniture.service;
 
+import com.exltial.furniture.entity.PicDetailEntity;
 import com.exltial.furniture.entity.PicEntity;
 
 import java.util.List;
@@ -14,4 +15,14 @@ import java.util.List;
  */
 public interface PictureService {
     List<PicEntity> getPicList(Integer pageNum);
+
+    boolean deleteSku(String skuId);
+
+    void addSku(PicEntity entity);
+
+    List<PicDetailEntity> getDetailBySkuId(String skuId);
+
+    PicEntity getSkuById(String skuId);
+
+    void updateSku(PicEntity entity);
 }

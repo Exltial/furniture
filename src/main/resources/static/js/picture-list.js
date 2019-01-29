@@ -29,6 +29,9 @@ api.get = function (url, successFn, errorFn) {
 api.getList = function (param, successFn, errorFn) {
     api.post('/pic/list', param, successFn, errorFn)
 };
+api.deleteById = function (param, successFn, errorFn) {
+    api.post('/pic/deleteSku', param, successFn, errorFn)
+};
 
 let table = new Vue({
     el: '#table',
@@ -71,6 +74,30 @@ let table = new Vue({
                     _this.hasPreviousPage = res.hasPreviousPage;
                     _this.hasNextPage = res.hasNextPage;
                 }
+            })
+        },
+        picture_edit: function (name, url, param) {
+            var index = layer.open({
+                type: 2,
+                title: name,
+                content: url + "?skuId=" + param
+            });
+            layer.full(index);
+        },
+        picture_del: function (skuId) {
+            layer.confirm('确认要删除吗？', function () {
+                const param = {
+                    skuId: skuId
+                };
+                api.deleteById(param, function (res) {
+                    if (res.result) {
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                        window.location.href = "/view/toPictureList";
+                    } else {
+                        layer.msg('删除失败!' + res.errorMsg, {icon: 1, time: 1000});
+                        window.location.href = "/view/toPictureList";
+                    }
+                })
             })
         }
     }

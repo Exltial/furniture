@@ -63,5 +63,23 @@
     </table>
     <button @click="click">click</button>
 </div>
+<div id="ul">
+    <ul v-for="todo in skuList">
+        <li>
+            <div>
+                <p>{{todo.a}}</p>
+                <a href="javascript:" @click="click(todo.a)">++</a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<p hidden id="uploadFlag"></p>
+<div id="btnTest">
+    <button @click="click">...</button>
+</div>
+
+
+<img src="/cnaidc.png">
 </body>
 <script src="../static/js/test.js" type="text/javascript"></script>
