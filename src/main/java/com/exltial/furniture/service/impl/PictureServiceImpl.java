@@ -67,4 +67,9 @@ public class PictureServiceImpl implements PictureService {
     public void updateSku(PicEntity entity) {
         pictureDao.updateSku(entity);
     }
+
+    @Override
+    public void addSkuDetails(PicDetailEntity picDetailEntity) {
+        pictureDao.addSkuDetails(picDetailEntity);
+    }
 }

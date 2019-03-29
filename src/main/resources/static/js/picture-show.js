@@ -54,17 +54,16 @@ let app = new Vue({
             api.getData(param, function (res) {
                 if (res.result) {
                     _this.picDetailList = res.data;
-                } else {
-                    alert(res.errorMsg);
                 }
             })
         },
-        editDetails: function (name, url, param) {
-            layer.open({
+        editDetails: function (name, url) {
+            let index = layer.open({
                 type: 2,
                 title: name,
-                content: url + "?skuId=" + param
+                content: url + "?skuId=" + this.skuId
             });
+            layer.full(index);
         }
     }
 });

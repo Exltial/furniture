@@ -108,4 +108,11 @@ public class ViewController {
     public String toProductCategoryAdd() {
         return "product-category-add";
     }
+
+    @RequestMapping(value = "/toDetailAdd")
+    public String toDetailAdd(String skuId) {
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        requestAttributes.getRequest().setAttribute("skuId", skuId);
+        return "details-add";
+    }
 }

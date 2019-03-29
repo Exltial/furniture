@@ -25,4 +25,6 @@ public interface PictureService {
     PicEntity getSkuById(String skuId);
 
     void updateSku(PicEntity entity);
+
+    void addSkuDetails(PicDetailEntity picDetailEntity);
 }

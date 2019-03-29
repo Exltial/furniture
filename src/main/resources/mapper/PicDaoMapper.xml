@@ -94,4 +94,7 @@
         </trim>
         WHERE sku_id = #{skuId,jdbcType=VARCHAR} AND cover = 1
     </update>
+    <insert id="addSkuDetails" parameterType="com.exltial.furniture.entity.PicDetailEntity">
+        INSERT INTO tb_sku (sku_id,sku_url,cover) VALUES (#{skuId,jdbcType=VARCHAR},#{skuUrl,jdbcType=VARCHAR},0)
+    </insert>
 </mapper>

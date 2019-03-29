@@ -12,6 +12,7 @@ import lombok.Data;
  */
 @Data
 public class PicDetailEntity {
+    private String skuId;
     private String skuName;
     private String skuUrl;
 }

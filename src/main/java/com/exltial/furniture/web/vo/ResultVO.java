@@ -14,4 +14,5 @@ public class ResultVO<T> implements Serializable {
     private Boolean result;
     private String errorMsg;
     private transient T data;
+    private String message;
 }

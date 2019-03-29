@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.exltial.furniture.entity.PicDetailEntity;
 import com.exltial.furniture.entity.PicEntity;
+import com.exltial.furniture.entity.SkuIdEntity;
 import com.exltial.furniture.service.PictureService;
 import com.exltial.furniture.utils.DateUtils;
 import com.exltial.furniture.utils.ParamUtils;
@@ -160,11 +161,13 @@ public class PictureController {
         }
         // 获取文件名
         String fileName = file.getOriginalFilename();
-        SessionUtils.set(ParamUtils.FILENAME, fileName);
         log.info("上传的文件名为：" + fileName);
         // 获取文件的后缀名
         String suffixName = fileName.substring(fileName.lastIndexOf('.'));
         log.info("上传的后缀名为：" + suffixName);
+        fileName = UUIDUtils.getId() + suffixName;
+        SessionUtils.set(ParamUtils.FILENAME, fileName);
+
         // 文件上传后的路径
         File dest = new File(filePath + fileName);
         // 检测是否存在目录
@@ -220,6 +223,34 @@ public class PictureController {
             resultVO.setResult(true);
         } catch (Exception e) {
             resultVO.setErrorMsg(e.getMessage());
+        }
+        return resultVO;
+    }
+
+    /**
+     * 添加产品明细图
+     */
+    @RequestMapping(value = "addSkuDetail")
+    public ResultVO addSkuDetail(String request) {
+        ResultVO<Object> resultVO = new ResultVO<>();
+        resultVO.setResult(false);
+        String fileName = SessionUtils.get(ParamUtils.FILENAME) instanceof String ? (String) SessionUtils.get(ParamUtils.FILENAME) : "";
+        if (StringUtils.isEmpty(fileName)) {
+            resultVO.setErrorMsg("未检测到上传文件");
+            return resultVO;
+        }
+        try {
+            SkuIdEntity entity = JSON.parseObject(request, new TypeReference<SkuIdEntity>() {
+            });
+            String skuId = entity.getSkuId();
+            PicDetailEntity picDetailEntity = new PicDetailEntity();
+            picDetailEntity.setSkuId(skuId);
+            picDetailEntity.setSkuUrl("/" + fileName);
+            pictureService.addSkuDetails(picDetailEntity);
+            resultVO.setResult(true);
+            resultVO.setMessage(skuId);
+        } catch (Exception ex) {
+            resultVO.setErrorMsg(ex.getMessage());
         }
         return resultVO;
     }
