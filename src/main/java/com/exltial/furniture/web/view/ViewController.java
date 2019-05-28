@@ -115,4 +115,9 @@ public class ViewController {
         requestAttributes.getRequest().setAttribute("skuId", skuId);
         return "details-add";
     }
+
+    @RequestMapping(value = "/toMall")
+    public String toMall() {
+        return "ctps_361_ov/index";
+    }
 }

@@ -26,7 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         } else {
             log.info("negative!request:{}", JSON.toJSONString(request.getRequestURL()));
-            response.sendRedirect(request.getContextPath() + "/view/toLogin");
+            response.sendRedirect(request.getContextPath() + "/view/toMall");
             return false;
         }
     }

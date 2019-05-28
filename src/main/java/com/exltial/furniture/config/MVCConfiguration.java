@@ -22,7 +22,7 @@ public class MVCConfiguration implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
 
-        registry.addViewController("/").setViewName("forward:/view/toLogin");
+        registry.addViewController("/").setViewName("forward:/view/toMall");
 
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
@@ -34,6 +34,7 @@ public class MVCConfiguration implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor)
                 .excludePathPatterns("/view/toLogin")
                 .excludePathPatterns("/login/validate")
+                .excludePathPatterns("/view/toMall")
                 .excludePathPatterns("/static/**");
     }
 
@@ -43,6 +44,8 @@ public class MVCConfiguration implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/static")
                 .addResourceLocations("classpath:/static/lib")
                 .addResourceLocations("classpath:/static/temp")
-                .addResourceLocations("classpath:/static/js");
+                .addResourceLocations("classpath:/static/js")
+                .addResourceLocations("classpath:/static/images")
+                .addResourceLocations("classpath:/static/css");
     }
 }
