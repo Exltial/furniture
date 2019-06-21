@@ -35,7 +35,8 @@ public class MVCConfiguration implements WebMvcConfigurer {
                 .excludePathPatterns("/view/toLogin")
                 .excludePathPatterns("/login/validate")
                 .excludePathPatterns("/view/toMall")
-                .excludePathPatterns("/static/**");
+                .excludePathPatterns("/static/**")
+                .excludePathPatterns("/sku/**");
     }
 
     @Override
@@ -46,6 +47,7 @@ public class MVCConfiguration implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/temp")
                 .addResourceLocations("classpath:/static/js")
                 .addResourceLocations("classpath:/static/images")
-                .addResourceLocations("classpath:/static/css");
+                .addResourceLocations("classpath:/static/css")
+                .addResourceLocations("/*.jpg");
     }
 }
